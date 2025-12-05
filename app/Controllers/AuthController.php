@@ -6,6 +6,7 @@ require __DIR__ . '/../Models/UserModel.php';
 use App\Models\UserModel;
 
 class AuthController {
+  
   public function signupForm() {
     require __DIR__ . '/../Views/auth/signup.php';
   }

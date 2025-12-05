@@ -8,6 +8,7 @@ use App\Core\Router;
 
 // Routes
 $router = Router::getInstance();
+
 // Test
 $router->get('/test', 'TestController@test');
 // Signup routes
