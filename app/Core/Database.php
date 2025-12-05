@@ -18,11 +18,9 @@ class Database {
         $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
         self::$instance = new PDO($dsn, DB_USER, DB_PASSWORD);
         self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connexion réussie !";
       } catch(PDOException $e) {
         die("Erreur de connexion : " . $e->getMessage());
       }
-      
     }
     return self::$instance;
   }
