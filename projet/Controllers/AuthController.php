@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace Controllers;
 
 require __DIR__ . '/../Models/UserModel.php';
-use App\Models\UserModel;
+use Models\UserModel;
 
 class AuthController {
   

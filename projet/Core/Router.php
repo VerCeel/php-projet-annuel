@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace Core;
 
 class Router {
   private static ?Router $instance = null;
@@ -34,9 +34,9 @@ class Router {
     }
 
   [$controllerName, $actionName] = explode('@', $this->routes[$method][$uri]);
-  $controllerName = "App\\Controllers\\" . $controllerName;
+  $controllerName = "Controllers\\" . $controllerName;
   $controller = new $controllerName();
 
-  return $controller->{$actionName}();
+  return $controller->$actionName();
   }
 }

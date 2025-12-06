@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Models;
 
 require __DIR__ . '/../Core/Database.php';
 use App\Core\Database;
