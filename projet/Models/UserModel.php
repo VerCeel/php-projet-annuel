@@ -19,4 +19,10 @@ class UserModel {
       password_hash($data['password'], PASSWORD_DEFAULT)
     ]);
   }
+
+  public function getUserByEmail($email) {
+    $preRequest = $this->db->prepare("SELECT * FROM users where email = ?");
+    $preRequest->execute([$email]);
+    return $preRequest->fetch();
+  }
 }

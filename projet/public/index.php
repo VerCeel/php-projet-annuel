@@ -11,12 +11,14 @@ $router = Router::getInstance();
 
 // Test
 $router->get('/test', 'TestController@test');
-
 $router->get('/', 'TestController@abc');
 
 // Signup routes
 $router->get('/signup', 'AuthController@signupForm');
-// logique
 $router->post('/signup/submit', 'AuthController@signupSubmit');
+
+// Login
+$router->get('/login', 'AuthController@loginForm');
+$router->post('/login/submit', 'AuthController@loginSubmit');
 
 $router->dispatch();
