@@ -6,6 +6,7 @@ require __DIR__ . '/../Controllers/AuthController.php';
 require __DIR__ . '/../Controllers/AdminUserController.php';
 require __DIR__ . '/../Controllers/AdminPageController.php';
 
+use Controllers\AdminPageController;
 use Core\Router;
 
 // Routes
@@ -30,5 +31,10 @@ $router->get('/admin/users/delete', 'AdminUserController@deleteUser');
 // BO Pages
 $router->get('/admin/pages', 'AdminPageController@listPages');
 $router->get('/admin/page', 'AdminPageController@viewPage');
+$router->get('/admin/new-page', 'AdminPageController@viewNewPage');
+$router->post('/admin/create-new-page', 'AdminPageController@createNewPage');
+$router->get('/admin/delete-page', 'AdminPageController@deletePage');
+$router->get('/admin/update-page-view', 'AdminPageController@viewPageToUpdate');
+$router->post('/admin/update-page', 'AdminPageController@updatePage');
 
 $router->dispatch();

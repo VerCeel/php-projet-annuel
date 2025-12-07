@@ -19,15 +19,59 @@ class AdminPageController {
 
   public function viewPage() {
     checkAuth();
+    if (!isset($_GET['slug'])) {
+      echo "Page introuvable";
+      return;
+    }
+    $slug = $_GET['slug'];
+    $pageModel = new PageModel();
+    $page = $pageModel->getPageBySlug($slug);
+    require __DIR__ . '/../Views/page/page.php';
+  }
 
-    if (!isset($_GET['id'])) {
+  public function viewNewPage() {
+    checkAuth();
+    require __DIR__ . '/../Views/admin/newPage.php';
+  }
+
+  public function viewPageToUpdate() {
+    checkAuth();
+    if (!isset($_GET['slug'])) {
+      echo "Page introuvable";
+      return;
+    }
+    $slug = $_GET['slug'];
+    $pageModel = new PageModel();
+    $page = $pageModel->getPageBySlug($slug);
+    require __DIR__ . '/../Views/admin/updatePage.php';
+  }
+
+  public function createNewPage() {
+    checkAuth();
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    if(!$title || !$content){
+      echo "Merci de remplir l'ensemble des champs";
+      return;
+    }
+    $slug = implode('-', preg_split('/\s+/', strtolower($title)));
+    $pageModel = new PageModel();
+
+    $pageModel->createPage($title, $slug, $content);
+
+    header("Location: /admin/pages");
+    exit;
+  }
+
+  public function deletePage() {
+    checkAuth();
+    if(!isset($_GET['id'])) {
       echo "Page introuvable";
       return;
     }
     $id = $_GET['id'];
     $pageModel = new PageModel();
-    $page = $pageModel->getPageById($id);
-    
-    require __DIR__ . '/../Views/page/page.php';
+    $pageModel->deletePageById($id);
+    header("Location: /admin/pages");
   }
 }
