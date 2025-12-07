@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-require __DIR__ . '/../Models/UserModel.php';
+require_once __DIR__ . '/../Models/UserModel.php';
 use Models\UserModel;
 
 class AuthController {

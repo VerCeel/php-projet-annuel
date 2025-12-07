@@ -1,5 +1,7 @@
 <?php
 
+namespace helpers;
+
 session_start();
 
 function checkAuth() {

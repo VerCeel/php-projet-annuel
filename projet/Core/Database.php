@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core ;
+namespace Core ;
 
 require __DIR__ . '/../config/config.php';
 use PDO;
