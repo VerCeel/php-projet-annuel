@@ -25,4 +25,5 @@ class AdminUserController {
     header("Location: /admin/users");
     exit;
   }
+
 }

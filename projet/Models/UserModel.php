@@ -50,4 +50,28 @@ class UserModel {
     $preReq->execute([$id]);
     return $preReq->fetch();
   }
+
+    public function findUserByEmail($email) {
+    $preReq = $this->db->prepare("SELECT * FROM users WHERE email = ?");
+    $preReq->execute([$email]);
+    return $preReq->fetch();
+  }
+
+  public function saveResetToken($userId, $token) {
+    $preReq = $this->db->prepare("UPDATE users SET verification_token = ? where id =?");
+    $preReq->execute([$token, $userId]);
+  }
+
+  public function resetPasswordByToken($token, $newPassword) {
+    $preReq = $this->db->prepare("SELECT * FROM users WHERE verification_token = ?");
+    $preReq->execute([$token]);
+    $user = $preReq->fetch();
+    if(!$user) {
+      return false;
+    }
+    $hashedpsw = password_hash($newPassword, PASSWORD_DEFAULT);
+    $update = $this->db->prepare("UPDATE users SET password= ?, verification_token = 0 WHERE verification_token = ?");
+    $update->execute([$hashedpsw, $token]);
+    return true;
+  }
 }

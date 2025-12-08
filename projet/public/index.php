@@ -27,6 +27,13 @@ $router->get('/verify', 'AuthController@verifyEmail');
 $router->get('/login', 'AuthController@loginForm');
 $router->post('/login/submit', 'AuthController@loginSubmit');
 
+// Mot de passe oublié / envoi
+$router->get('/forgotten-password', 'AuthController@viewForgottenPassword');
+$router->post('/forgotten-password', 'AuthController@forgottenPassword');
+// Mot de passe oublié / retour
+$router->get('/reset-password', 'AuthController@viewResetPassword');
+$router->post('/reset-password', 'AuthController@resetPassword');
+
 // BO Users
 $router->get('/admin/users', 'AdminUserController@listUsers');
 $router->get('/admin/users/delete', 'AdminUserController@deleteUser');

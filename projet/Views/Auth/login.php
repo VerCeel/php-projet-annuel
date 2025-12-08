@@ -14,5 +14,7 @@
   </form>
   <br>
   <a href="/signup">Je n'ai pas de compte</a>
+  <br>
+  <a href="/forgotten-password">J'ai oublié mon mot de passe</a>
 </body>
 </html>

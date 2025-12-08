@@ -7,6 +7,8 @@ require_once __DIR__ . '/../Models/UserModel.php';
 use Models\UserModel;
 use helpers\MailService;
 
+use function helpers\checkAuth;
+
 class AuthController {
   
   public function signupForm() {
@@ -62,6 +64,42 @@ class AuthController {
       echo "Email verifié, compte validé";
     } else {
       echo "Le lien n'est plus valide";
+    }
+  }
+
+  public function viewForgottenPassword() {
+    require __DIR__ . '/../Views/Auth/forgottenPassword.php';
+  }
+
+  public function forgottenPassword() {
+    $email = $_POST['email'];
+    $userModel = new UserModel();
+    $user = $userModel->findUserByEmail($email);
+    if(!$user) {
+      echo "Une erreur est survenue";
+      return;
+    }
+    $token =  bin2hex(random_bytes(32));
+    $userModel->saveResetToken($user['id'], $token);
+    if(\MailService::sendResetPassword($email, $token)) {
+      echo "Vérifiez votre adresse mail";
+    } else {
+      echo "un probleme est survenu lors de la réinitialisation du mot de passe";
+    }
+  }
+
+  public function viewResetPassword() {
+    require __DIR__ . '/../Views/Auth/resetPassword.php';
+  }
+
+  public function resetPassword() {
+    $newPassword = $_POST['password'];
+    $token = $_POST['token'];
+    $userModel = new UserModel();
+    if($userModel->resetPasswordByToken($token, $newPassword)) {
+      echo "mot de passe réinitialisé avec succès";
+    } else {
+      echo "Token expiré";
     }
   }
 }
