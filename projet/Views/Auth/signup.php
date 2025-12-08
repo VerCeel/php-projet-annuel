@@ -12,5 +12,7 @@
     <input type="password" name="password" placeholder="password" required>
     <button type="submit">S'inscrire</button>
   </form>
+  <br>
+  <a href="/login">J'ai déjà un compte</a>
 </body>
 </html>

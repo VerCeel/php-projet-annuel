@@ -20,6 +20,9 @@ $router->get('/', 'TestController@abc');
 $router->get('/signup', 'AuthController@signupForm');
 $router->post('/signup/submit', 'AuthController@signupSubmit');
 
+// Verifier l'email
+$router->get('/verify', 'AuthController@verifyEmail');
+
 // Login
 $router->get('/login', 'AuthController@loginForm');
 $router->post('/login/submit', 'AuthController@loginSubmit');

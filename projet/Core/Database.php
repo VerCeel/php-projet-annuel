@@ -2,7 +2,7 @@
 
 namespace Core ;
 
-require __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../config/config.php';
 use PDO;
 use PDOException;
 

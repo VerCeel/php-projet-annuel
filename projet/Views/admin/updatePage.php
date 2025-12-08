@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Mise à jour de la page</title>
 </head>
 <body>
   <h1>Modifier mon article :</h1>
@@ -18,5 +18,7 @@
     <br>
     <button type="submit">Modifier</button>
   </form>
+  <br>
+  <a href="/admin/pages">Retourner à la liste des pages</a>
 </body>
 </html>

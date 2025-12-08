@@ -12,7 +12,7 @@ class AdminPageController {
 
   public function listPages() {
     checkAuth();
-    $pageModel = new PageModel();
+    $pageModel = PageModel::getInstance();
     $pages = $pageModel->getAllPages();
     require __DIR__ . '/../Views/admin/pages.php';
   }
@@ -24,7 +24,7 @@ class AdminPageController {
       return;
     }
     $slug = $_GET['slug'];
-    $pageModel = new PageModel();
+    $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
     require __DIR__ . '/../Views/page/page.php';
   }
@@ -41,7 +41,7 @@ class AdminPageController {
       return;
     }
     $slug = $_GET['slug'];
-    $pageModel = new PageModel();
+    $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
     require __DIR__ . '/../Views/admin/updatePage.php';
   }
@@ -55,7 +55,7 @@ class AdminPageController {
       return;
     }
     $slug = implode('-', preg_split('/\s+/', strtolower($title)));
-    $pageModel = new PageModel();
+    $pageModel = PageModel::getInstance();
 
     $pageModel->createPage($title, $slug, $content);
 
@@ -70,8 +70,21 @@ class AdminPageController {
       return;
     }
     $id = $_GET['id'];
-    $pageModel = new PageModel();
+    $pageModel = PageModel::getInstance();
     $pageModel->deletePageById($id);
     header("Location: /admin/pages");
+  }
+
+  public function updatePage() {
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    if(!$title || !$content){
+      echo "Merci de remplir l'ensemble des champs";
+      return;
+    }
+    $newSlug = implode('-', preg_split('/\s+/', strtolower($title)));
+    $pageModel = PageModel::getInstance();
+    $pageModel->updatePageBySlug($title, $content, $_GET['slug'], $newSlug);
+    header("Location: /admin/update-page-view?slug=" . $newSlug);
   }
 }

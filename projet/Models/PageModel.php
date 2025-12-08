@@ -7,10 +7,18 @@ require_once __DIR__ . '/../Core/Database.php';
 use Core\Database;
 
 class PageModel {
+  private static ?PageModel $instance = null;
   private $db;
 
-  public function __construct() {
+  private function __construct() {
     $this->db = Database::getInstance();
+  }
+
+  public static function getInstance(): PageModel {
+    if(self::$instance === null) {
+      self::$instance = new self();
+    }
+    return self::$instance;
   }
 
   public function getAllPages() {
@@ -45,5 +53,10 @@ class PageModel {
   public function deletePageById($id) {
     $preReq = $this->db->prepare("DELETE FROM pages WHERE id = ?");
     $preReq->execute([$id]);
+  }
+
+  public function updatePageBySlug($title, $content, $formerSlug, $newSlug) {
+    $preReq = $this->db->prepare("UPDATE pages SET title = ?, slug = ?, content = ? WHERE slug =?");
+    $preReq->execute([$title, $newSlug, $content, $formerSlug]);
   }
 }

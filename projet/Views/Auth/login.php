@@ -12,5 +12,7 @@
     <input type="password" name="password" placeholder="password" required>
     <button type="submit">Se connecter</button>
   </form>
+  <br>
+  <a href="/signup">Je n'ai pas de compte</a>
 </body>
 </html>
