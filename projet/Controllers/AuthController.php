@@ -62,6 +62,7 @@ class AuthController {
     $userModel = new UserModel;
     if($userModel->verifyEmailByToken($token)) {
       echo "Email verifié, compte validé";
+      echo "<a href='/login'>Connecte-toi</a>";
     } else {
       echo "Le lien n'est plus valide";
     }
