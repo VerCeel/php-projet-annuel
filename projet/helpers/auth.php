@@ -4,11 +4,9 @@ namespace helpers;
 
 use Models\UserModel;
 
-session_start();
-
 function checkAuth() {
   if(!isset($_SESSION['user_id'])) {
-    header("location: /login");
+    header("Location: /login");
     exit;
   }
 

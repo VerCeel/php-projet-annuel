@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require __DIR__ . '/../Core/Router.php';
 require __DIR__ . '/../Controllers/Test-controllers.php';
@@ -8,6 +9,8 @@ require __DIR__ . '/../Controllers/AdminPageController.php';
 
 use Controllers\AdminPageController;
 use Core\Router;
+
+include __DIR__ . '/../Views/layout/header.php';
 
 // Routes
 $router = Router::getInstance();
@@ -48,3 +51,5 @@ $router->get('/admin/update-page-view', 'AdminPageController@viewPageToUpdate');
 $router->post('/admin/update-page', 'AdminPageController@updatePage');
 
 $router->dispatch();
+
+include __DIR__ . '/../Views/layout/footer.php';
