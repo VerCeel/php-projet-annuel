@@ -2,22 +2,20 @@
 session_start();
 
 require __DIR__ . '/../Core/Router.php';
-require __DIR__ . '/../Controllers/Test-controllers.php';
+require __DIR__ . '/../Controllers/HomePageController.php';
 require __DIR__ . '/../Controllers/AuthController.php';
 require __DIR__ . '/../Controllers/AdminUserController.php';
 require __DIR__ . '/../Controllers/AdminPageController.php';
 
-use Controllers\AdminPageController;
 use Core\Router;
 
-include __DIR__ . '/../Views/layout/header.php';
+// include __DIR__ . '/../Views/layout/header.php';
 
 // Routes
 $router = Router::getInstance();
 
-// Test
-$router->get('/test', 'TestController@test');
-$router->get('/', 'TestController@abc');
+// HomePage
+$router->get('/', 'HomePageController@abc');
 
 // Signup routes
 $router->get('/signup', 'AuthController@signupForm');
@@ -40,6 +38,8 @@ $router->post('/reset-password', 'AuthController@resetPassword');
 // BO Users
 $router->get('/admin/users', 'AdminUserController@listUsers');
 $router->get('/admin/users/delete', 'AdminUserController@deleteUser');
+$router->get('/admin/users/modify-user-role', 'AdminUserController@viewModifyRole');
+$router->post('/admin/users/modify-user-role', 'AdminUserController@modifyRole');
 
 // BO Pages
 $router->get('/admin/pages', 'AdminPageController@listPages');
@@ -52,4 +52,4 @@ $router->post('/admin/update-page', 'AdminPageController@updatePage');
 
 $router->dispatch();
 
-include __DIR__ . '/../Views/layout/footer.php';
+// include __DIR__ . '/../Views/layout/footer.php';

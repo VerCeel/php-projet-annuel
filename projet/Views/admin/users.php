@@ -20,7 +20,7 @@
       <td><?php echo $user['email']?></td>
       <td><?php echo $user['role']?></td>
       <td><a href="/admin/users/delete?id=<?php echo $user['id']?>">supprimer</a></td>
-      <td><a href="/admin/users/modify-role?id=<?php echo $user['id']?>">Modifier le role de l'utilisateur</a></td>
+      <td><a href="/admin/users/modify-user-role?id=<?php echo $user['id']?>">Modifier le role de l'utilisateur</a></td>
     </tr>
     <?php endforeach; ?>
   </table>

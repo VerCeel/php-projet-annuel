@@ -6,8 +6,8 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Titre : <?= $page['title'] ?></h1>
+  <h1>Titre : <?= htmlspecialchars($page['title']) ?></h1>
   <h2>Contenu:</h2>
-  <p> <?= $page['content'] ?></p>
+  <p> <?= htmlspecialchars($page['content']) ?></p>
 </body>
 </html>

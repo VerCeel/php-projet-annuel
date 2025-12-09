@@ -4,8 +4,12 @@ namespace Controllers;
 
 require __DIR__ . '/../helpers/MailService.php';
 require_once __DIR__ . '/../Models/UserModel.php';
+require __DIR__ . '/../helpers/checkInputs.php';
+
 use Models\UserModel;
 use helpers\MailService;
+use function helpers\isSafePassword;
+use function helpers\isValidEmail;
 
 use function helpers\checkAuth;
 
@@ -16,11 +20,15 @@ class AuthController {
   }
 
   public function signupSubmit() {
-    if(!$this->isSafePassword($_POST['password'])) {
+    if(!isValidEmail($_POST['email'])) {
+      echo "Merci de rentrer un email correct";
+      return;
+    }
+    if(!isSafePassword($_POST['password'])) {
       echo "Veuillez choisir un mot de passe avec au moins 8 caractères, un caractère spécial et une majuscule.";
       return;
     }
-    $userModel = new UserModel();
+    $userModel = UserModel::getInstance();
     $token = bin2hex(random_bytes(32));
     $result = $userModel->createUser($_POST['email'], $_POST['password'], 0, $token);
     if(!$result) {
@@ -40,7 +48,7 @@ class AuthController {
   }
 
   public function loginSubmit() {
-    $userModel = new UserModel();
+    $userModel = UserModel::getInstance();
     $user = $userModel->getUserByEmail($_POST['email']);
 
     if(!$user || !password_verify($_POST['password'], $user['password'])) {
@@ -63,7 +71,7 @@ class AuthController {
       return;
     }
 
-    $userModel = new UserModel;
+    $userModel = UserModel::getInstance();
     if($userModel->verifyEmailByToken($token)) {
       echo "Email verifié, compte validé";
       echo "<a href='/login'>Connecte-toi</a>";
@@ -78,7 +86,7 @@ class AuthController {
 
   public function forgottenPassword() {
     $email = $_POST['email'];
-    $userModel = new UserModel();
+    $userModel = UserModel::getInstance();
     $user = $userModel->findUserByEmail($email);
     if(!$user) {
       echo "Une erreur est survenue";
@@ -99,25 +107,17 @@ class AuthController {
 
   public function resetPassword() {
     $newPassword = $_POST['password'];
-    if(!$this->isSafePassword($newPassword)) {
+    if(!isSafePassword($newPassword)) {
       echo "Veuillez choisir un mot de passe avec au moins 8 caractères, une majuscule et un caractère spécial.";
       return;
     }
     $token = $_POST['token'];
-    $userModel = new UserModel();
+    $userModel = UserModel::getInstance();
     $res = $userModel->resetPasswordByToken($token, $newPassword);
     if($res) {
       echo "mot de passe réinitialisé avec succès";
     } else {
       echo "Token expiré";
-    }
-  }
-
-  public function isSafePassword($psw) {
-    if(preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $psw)){
-      return true ;
-    } else {
-      return false ;
     }
   }
 }

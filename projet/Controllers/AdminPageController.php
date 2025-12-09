@@ -4,17 +4,19 @@ namespace Controllers;
 
 require_once __DIR__ . '/../helpers/auth.php';
 require_once __DIR__ . '/../Models/PageModel.php';
+require_once __DIR__ . '/../Core/Controller.php';
 
+use Core\Controller;
 use function helpers\checkAdmin;
 use Models\PageModel;
 
-class AdminPageController {
+class AdminPageController extends Controller {
 
   public function listPages() {
     checkAdmin();
     $pageModel = PageModel::getInstance();
     $pages = $pageModel->getAllPages();
-    require __DIR__ . '/../Views/admin/pages.php';
+    $this->render('admin/pages', ['pages' => $pages]);
   }
 
   public function viewPage() {
@@ -26,12 +28,12 @@ class AdminPageController {
     $slug = $_GET['slug'];
     $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
-    require __DIR__ . '/../Views/page/page.php';
+    $this->render('/page/page', ['page' => $page]);
   }
 
   public function viewNewPage() {
     checkAdmin();
-    require __DIR__ . '/../Views/admin/newPage.php';
+    $this->render('/admin/newPage', []);
   }
 
   public function viewPageToUpdate() {
@@ -43,7 +45,7 @@ class AdminPageController {
     $slug = $_GET['slug'];
     $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
-    require __DIR__ . '/../Views/admin/updatePage.php';
+    $this->render('/admin/updatePage', ['page' => $page]);
   }
 
   public function createNewPage() {

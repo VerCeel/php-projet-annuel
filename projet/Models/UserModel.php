@@ -6,10 +6,19 @@ require __DIR__ . '/../Core/Database.php';
 use Core\Database;
 
 class UserModel {
+  private static $instance = null;
   private $db;
+  private function __clone() {}
 
-  public function __construct() {
+  private function __construct() {
     $this->db = Database::getInstance();
+  }
+
+  public static function getInstance() {
+    if(self::$instance === null) {
+      self::$instance = new self();
+    }
+    return self::$instance;
   }
 
   public function createUser($email, $password, $verified, $token) {
@@ -73,5 +82,10 @@ class UserModel {
     $update = $this->db->prepare("UPDATE users SET password= ?, verification_token = 0 WHERE verification_token = ?");
     $update->execute([$hashedpsw, $token]);
     return true;
+  }
+
+  public function findByEmailAndUpdateRole($email, $role) {
+    $preReq = $this->db->prepare("UPDATE users SET role = ? WHERE email = ?");
+    $preReq->execute([$role, $email]);
   }
 }

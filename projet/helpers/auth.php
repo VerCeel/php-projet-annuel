@@ -10,7 +10,7 @@ function checkAuth() {
     exit;
   }
 
-  $userModel = new UserModel();
+  $userModel = UserModel::getInstance();
   $user = $userModel->getUserById($_SESSION['user_id']);
 
   if(!$user || $user['is_verified'] !== 1) {
@@ -25,7 +25,7 @@ function checkAdmin() {
     header("Location: /login");
     exit;
   }
-  $userModel = new UserModel();
+  $userModel = UserModel::getInstance();
   $user = $userModel->getUserById($_SESSION['user_id']);
   if($user['role'] !== "ADMIN") {
     echo " 404 not found";
