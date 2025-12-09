@@ -16,6 +16,10 @@ class AuthController {
   }
 
   public function signupSubmit() {
+    if(!$this->isSafePassword($_POST['password'])) {
+      echo "Veuillez choisir un mot de passe avec au moins 8 caractères, un caractère spécial et une majuscule.";
+      return;
+    }
     $userModel = new UserModel();
     $token = bin2hex(random_bytes(32));
     $result = $userModel->createUser($_POST['email'], $_POST['password'], 0, $token);
@@ -95,12 +99,25 @@ class AuthController {
 
   public function resetPassword() {
     $newPassword = $_POST['password'];
+    if(!$this->isSafePassword($newPassword)) {
+      echo "Veuillez choisir un mot de passe avec au moins 8 caractères, une majuscule et un caractère spécial.";
+      return;
+    }
     $token = $_POST['token'];
     $userModel = new UserModel();
-    if($userModel->resetPasswordByToken($token, $newPassword)) {
+    $res = $userModel->resetPasswordByToken($token, $newPassword);
+    if($res) {
       echo "mot de passe réinitialisé avec succès";
     } else {
       echo "Token expiré";
+    }
+  }
+
+  public function isSafePassword($psw) {
+    if(preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $psw)){
+      return true ;
+    } else {
+      return false ;
     }
   }
 }
