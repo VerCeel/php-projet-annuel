@@ -35,7 +35,7 @@ class UserModel {
   }
 
   public function getAllUsers() {
-    $preRequest = $this->db->prepare("SELECT id, email FROM users");
+    $preRequest = $this->db->prepare("SELECT id, email, role FROM users");
     $preRequest->execute();
     return $preRequest->fetchAll();
   }

@@ -5,20 +5,20 @@ namespace Controllers;
 require_once __DIR__ . '/../helpers/auth.php';
 require_once __DIR__ . '/../Models/PageModel.php';
 
-use function helpers\checkAuth;
+use function helpers\checkAdmin;
 use Models\PageModel;
 
 class AdminPageController {
 
   public function listPages() {
-    checkAuth();
+    checkAdmin();
     $pageModel = PageModel::getInstance();
     $pages = $pageModel->getAllPages();
     require __DIR__ . '/../Views/admin/pages.php';
   }
 
   public function viewPage() {
-    checkAuth();
+    checkAdmin();
     if (!isset($_GET['slug'])) {
       echo "Page introuvable";
       return;
@@ -30,12 +30,12 @@ class AdminPageController {
   }
 
   public function viewNewPage() {
-    checkAuth();
+    checkAdmin();
     require __DIR__ . '/../Views/admin/newPage.php';
   }
 
   public function viewPageToUpdate() {
-    checkAuth();
+    checkAdmin();
     if (!isset($_GET['slug'])) {
       echo "Page introuvable";
       return;
@@ -47,7 +47,7 @@ class AdminPageController {
   }
 
   public function createNewPage() {
-    checkAuth();
+    checkAdmin();
     $title = $_POST['title'];
     $content = $_POST['content'];
     if(!$title || !$content){
@@ -64,7 +64,7 @@ class AdminPageController {
   }
 
   public function deletePage() {
-    checkAuth();
+    checkAdmin();
     if(!isset($_GET['id'])) {
       echo "Page introuvable";
       return;
@@ -76,6 +76,7 @@ class AdminPageController {
   }
 
   public function updatePage() {
+    checkAdmin();
     $title = $_POST['title'];
     $content = $_POST['content'];
     if(!$title || !$content){

@@ -19,3 +19,16 @@ function checkAuth() {
     exit;
   }
 }
+
+function checkAdmin() {
+  if(!isset($_SESSION['user_id'])) {
+    header("Location: /login");
+    exit;
+  }
+  $userModel = new UserModel();
+  $user = $userModel->getUserById($_SESSION['user_id']);
+  if($user['role'] !== "ADMIN") {
+    echo " 404 not found";
+    exit;
+  }
+}

@@ -6,19 +6,19 @@ require_once __DIR__ . '/../helpers/auth.php';
 require_once __DIR__ . '/../Models/UserModel.php';
 
 use Models\UserModel;
-use function helpers\checkAuth;
+use function helpers\checkAdmin;
 
 class AdminUserController {
 
   public function listUsers() {
-    checkAuth();
+    checkAdmin();
     $userModel = new UserModel();
     $users = $userModel->getAllUsers();
     require __DIR__ . '/../Views/admin/users.php';
   }
 
   public function deleteUser() {
-    checkAuth();
+    checkAdmin();
     $id = $_GET['id'];
     $userModel = new UserModel();
     $userModel->deleteUser($id);
