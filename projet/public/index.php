@@ -9,7 +9,8 @@ require __DIR__ . '/../Controllers/AdminPageController.php';
 
 use Core\Router;
 
-// include __DIR__ . '/../Views/layout/header.php';
+// Instancie le router
+$router = Router::getInstance();
 
 // Routes
 $router = Router::getInstance();

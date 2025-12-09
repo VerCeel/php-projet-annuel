@@ -5,7 +5,7 @@ namespace helpers;
 use Models\UserModel;
 
 function checkAuth() {
-  if(!isset($_SESSION['user_id'])) {
+  if(!isset($_SESSION['user'])) {
     header("Location: /login");
     exit;
   }
@@ -21,12 +21,12 @@ function checkAuth() {
 }
 
 function checkAdmin() {
-  if(!isset($_SESSION['user_id'])) {
+  if(!isset($_SESSION['user'])) {
     header("Location: /login");
     exit;
   }
   $userModel = UserModel::getInstance();
-  $user = $userModel->getUserById($_SESSION['user_id']);
+  $user = $userModel->getUserById($_SESSION['user']['id']);
   if($user['role'] !== "ADMIN") {
     echo " 404 not found";
     exit;

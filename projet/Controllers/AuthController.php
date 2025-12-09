@@ -11,8 +11,6 @@ use helpers\MailService;
 use function helpers\isSafePassword;
 use function helpers\isValidEmail;
 
-use function helpers\checkAuth;
-
 class AuthController {
   
   public function signupForm() {
@@ -59,7 +57,10 @@ class AuthController {
     session_start();
     }
     // On peut utiliser un id plus complexe pour + de sécurité.
-    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['user'] = [
+      'id' => $user['id'],
+      'role' => $user['role']
+    ];
 
     echo 'connexion réussie';
   }
