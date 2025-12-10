@@ -1,8 +1,9 @@
 <?php
 
-namespace Core ;
+namespace Core;
 
 require_once __DIR__ . '/../config/config.php';
+
 use PDO;
 use PDOException;
 
@@ -26,4 +27,4 @@ class Database {
   }
 }
 
-$db = Database::getInstance();
+// $db = Database::getInstance();

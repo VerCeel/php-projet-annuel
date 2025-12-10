@@ -12,9 +12,6 @@ use Core\Router;
 // Instancie le router
 $router = Router::getInstance();
 
-// Routes
-$router = Router::getInstance();
-
 // HomePage
 $router->get('/', 'HomePageController@getHomePage');
 

@@ -5,6 +5,7 @@ require_once __DIR__.'/PHPMailer/PHPMailer.php';
 require_once __DIR__.'/PHPMailer/SMTP.php';
 require_once __DIR__.'/PHPMailer/Exception.php';
 require_once __DIR__ . '/../config/config.php'; 
+require_once __DIR__ . '/../config/config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -19,8 +20,8 @@ class MailService {
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com'; 
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'leoplumail72@gmail.com';
-            $mail->Password   = 'itql wieu wgpq rajg';
+            $mail->Username   = EMAIL_OWNER;
+            $mail->Password   = PSW_APP;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
