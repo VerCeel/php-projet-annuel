@@ -8,6 +8,7 @@ require_once __DIR__ . '/../Core/Controller.php';
 
 use Core\Controller;
 use function helpers\checkAdmin;
+use function helpers\checkAuth;
 use Models\PageModel;
 
 class AdminPageController extends Controller {
@@ -16,11 +17,11 @@ class AdminPageController extends Controller {
     checkAdmin();
     $pageModel = PageModel::getInstance();
     $pages = $pageModel->getAllPages();
-    $this->render('admin/pages', ['pages' => $pages]);
+    $this->render('admin/pages', ['pages' => $pages, 'title' => 'Gestion des pages admin']);
   }
 
   public function viewPage() {
-    checkAdmin();
+    checkAuth();
     if (!isset($_GET['slug'])) {
       echo "Page introuvable";
       return;
@@ -28,7 +29,7 @@ class AdminPageController extends Controller {
     $slug = $_GET['slug'];
     $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
-    $this->render('/page/page', ['page' => $page]);
+    $this->render('/page/page', ['page' => $page, 'title' => $slug]);
   }
 
   public function viewNewPage() {
@@ -45,7 +46,7 @@ class AdminPageController extends Controller {
     $slug = $_GET['slug'];
     $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
-    $this->render('/admin/updatePage', ['page' => $page]);
+    $this->render('/admin/updatePage', ['page' => $page, 'title' => "Mettre à jour la page"]);
   }
 
   public function createNewPage() {

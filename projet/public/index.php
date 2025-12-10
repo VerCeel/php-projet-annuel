@@ -16,7 +16,7 @@ $router = Router::getInstance();
 $router = Router::getInstance();
 
 // HomePage
-$router->get('/', 'HomePageController@abc');
+$router->get('/', 'HomePageController@getHomePage');
 
 // Signup routes
 $router->get('/signup', 'AuthController@signupForm');

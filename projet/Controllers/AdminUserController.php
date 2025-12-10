@@ -16,7 +16,7 @@ class AdminUserController extends Controller {
     checkAdmin();
     $userModel = UserModel::getInstance();
     $users = $userModel->getAllUsers();
-    $this->render('/admin/users', ['users' => $users]);
+    $this->render('/admin/users', ['users' => $users, 'title' => "Voir tous les utilisateurs"]);
   }
 
   public function deleteUser() {
@@ -32,7 +32,7 @@ class AdminUserController extends Controller {
     checkAdmin();
     $userModel = UserModel::getInstance();
     $user = $userModel->getUserById($_GET['id']);
-    $this->render('/admin/setUserRole', ['user' => $user]);
+    $this->render('/admin/setUserRole', ['user' => $user, 'title' => "Modifier le rôle de " . $user['email']]);
   }
 
   public function modifyRole() {

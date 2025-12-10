@@ -5,13 +5,15 @@ namespace Controllers;
 require __DIR__ . '/../helpers/MailService.php';
 require_once __DIR__ . '/../Models/UserModel.php';
 require __DIR__ . '/../helpers/checkInputs.php';
+require_once __DIR__ . '/../Core/Controller.php';
 
+use Core\Controller;
 use Models\UserModel;
 use helpers\MailService;
 use function helpers\isSafePassword;
 use function helpers\isValidEmail;
 
-class AuthController {
+class AuthController extends Controller {
   
   public function signupForm() {
     require __DIR__ . '/../Views/auth/signup.php';
@@ -61,8 +63,8 @@ class AuthController {
       'id' => $user['id'],
       'role' => $user['role']
     ];
-
     echo 'connexion réussie';
+    $this->render('/page/homePage', []);
   }
 
   public function verifyEmail() {

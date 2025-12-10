@@ -11,11 +11,12 @@ function checkAuth() {
   }
 
   $userModel = UserModel::getInstance();
-  $user = $userModel->getUserById($_SESSION['user_id']);
+  $user = $userModel->getUserById($_SESSION['user']['id']);
 
   if(!$user || $user['is_verified'] !== 1) {
     session_destroy();
-    header("Location: /login");
+    // header("Location: /login");
+    echo "Veuillez confirmer votre adresse mail afin de voir nos pages";
     exit;
   }
 }

@@ -1,28 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liste utilisateurs</title>
-</head>
-<body>
-  <h1>User list</h1>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Actions</th>
-    </tr>
-    <?php foreach($users as $user): ?>
-    <tr>
-      <td><?php echo $user['id']?></td>
-      <td><?php echo $user['email']?></td>
-      <td><?php echo $user['role']?></td>
-      <td><a href="/admin/users/delete?id=<?php echo $user['id']?>">supprimer</a></td>
-      <td><a href="/admin/users/modify-user-role?id=<?php echo $user['id']?>">Modifier le role de l'utilisateur</a></td>
-    </tr>
-    <?php endforeach; ?>
-  </table>
-</body>
-</html>
+
+<h1>User list</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Actions</th>
+  </tr>
+  <?php foreach($users as $user): ?>
+  <tr>
+    <td><?php echo $user['id']?></td>
+    <td><?php echo $user['email']?></td>
+    <td><?php echo $user['role']?></td>
+    <td><a href="/admin/users/delete?id=<?php echo $user['id']?>">supprimer</a></td>
+    <td><a href="/admin/users/modify-user-role?id=<?php echo $user['id']?>">Modifier le role de l'utilisateur</a></td>
+  </tr>
+  <?php endforeach; ?>
+</table>

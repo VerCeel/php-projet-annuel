@@ -2,11 +2,12 @@
 
 namespace Controllers;
 
-class HomePageController {
-    public function abc() {
-        echo "<h1>Page d'acceuil</h1>";
-        echo "<br>";
-        echo "<a href='/login'>Connexion</a> <br>";
-        echo "<a href='/signup'>Inscription</a>";
+require_once __DIR__ . '/../Core/Controller.php';
+
+use Core\Controller;
+
+class HomePageController extends Controller {
+    public function getHomePage() {
+        $this->render('/page/homePage', []);
     }
 }

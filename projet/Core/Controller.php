@@ -7,8 +7,7 @@ namespace Core;
 class Controller {
   protected function render($view, $data = []) {
     extract($data);
-    require __DIR__ . '/../Views/layout/header.php';
-    require __DIR__ . '/../Views/' . $view . '.php';
-    require __DIR__ . '/../Views/layout/footer.php';
+    $viewPath = __DIR__ . '/../Views/' . $view . '.php';
+    require __DIR__ . '/../Views/layout/main.php';
   }
 }
