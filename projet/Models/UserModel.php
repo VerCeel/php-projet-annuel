@@ -85,7 +85,7 @@ class UserModel {
   }
 
   public function findByEmailAndUpdateRole($email, $role) {
-    $preReq = $this->db->prepare("UPDATE users SET role = ? WHERE email = ?");
+    $preReq = $this->db->prepare("UPDATE users SET role = ? WHERE email = ? AND id != 4");
     $preReq->execute([$role, $email]);
   }
 }
