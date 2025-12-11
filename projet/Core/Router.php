@@ -23,20 +23,32 @@ class Router {
     $this->routes['POST'][$path] = $controllerAction;
   }
 
-  public function dispatch() {
+public function dispatch() {
     $method = $_SERVER['REQUEST_METHOD'];
-    $uri = strtok($_SERVER['REQUEST_URI'], '?');
+    $uri = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
-    if(!isset($this->routes[$method][$uri])) {
-      http_response_code(404);
-      echo "404 not found";
-      return;
+    // 1. Route exacte ?
+    if(isset($this->routes[$method]['/' . $uri])) {
+        [$controllerName, $actionName] = explode('@', $this->routes[$method]['/' . $uri]);
+        $controllerName = "Controllers\\" . $controllerName;
+        return (new $controllerName())->$actionName();
     }
 
-  [$controllerName, $actionName] = explode('@', $this->routes[$method][$uri]);
-  $controllerName = "Controllers\\" . $controllerName;
-  $controller = new $controllerName();
+    // 2. Routes dynamiques /{slug}
+    foreach($this->routes[$method] as $path => $controllerAction) {
+        // si la route ressemble à "/{quelquechose}"
+        if (preg_match('#^\{(.+)\}$#', trim($path, '/'), $matches)) {
+            $paramName = $matches[1];
+            $paramValue = $uri;
 
-  return $controller->$actionName();
-  }
+            [$controllerName, $actionName] = explode('@', $controllerAction);
+            $controllerName = "Controllers\\" . $controllerName;
+            $controller = new $controllerName();
+            return $controller->$actionName($paramValue);
+        }
+    }
+
+    http_response_code(404);
+    echo "404 not found";
+}
 }

@@ -5,7 +5,9 @@ namespace Controllers;
 require_once __DIR__ . '/../helpers/auth.php';
 require_once __DIR__ . '/../Models/PageModel.php';
 require_once __DIR__ . '/../Core/Controller.php';
+require __DIR__ . '/../helpers/slugify.php';
 
+use function helpers\slugify;
 use Core\Controller;
 use function helpers\checkAdmin;
 use function helpers\checkAuth;
@@ -20,15 +22,15 @@ class AdminPageController extends Controller {
     $this->render('admin/pages', ['pages' => $pages, 'title' => 'Gestion des pages admin']);
   }
 
-  public function viewPage() {
+  public function viewPage($slug) {
     checkAuth();
-    if (!isset($_GET['slug'])) {
-      echo "Page introuvable";
-      return;
-    }
-    $slug = $_GET['slug'];
+    $slug = urldecode($slug);
     $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
+    if(!$page) {
+      echo "page introuvable";
+      return;
+    }
     $this->render('/page/page', ['page' => $page, 'title' => $slug]);
   }
 
@@ -57,7 +59,7 @@ class AdminPageController extends Controller {
       echo "Merci de remplir l'ensemble des champs";
       return;
     }
-    $slug = implode('-', preg_split('/\s+/', strtolower($title)));
+    $slug = slugify($title);
     $pageModel = PageModel::getInstance();
 
     $pageModel->createPage($title, $slug, $content);
@@ -86,6 +88,7 @@ class AdminPageController extends Controller {
       echo "Merci de remplir l'ensemble des champs";
       return;
     }
+    $newSlug = slugify($title);
     $newSlug = implode('-', preg_split('/\s+/', strtolower($title)));
     $pageModel = PageModel::getInstance();
     $pageModel->updatePageBySlug($title, $content, $_GET['slug'], $newSlug);

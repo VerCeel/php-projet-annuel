@@ -8,7 +8,7 @@
     ?> 
     <?php if (!empty($_SESSION['user'])): ?>
       <?php foreach($routes as $route): ?>
-      <a href="/admin/page?slug=<?php echo $route['slug']; ?>"><?php echo htmlspecialchars($route['title']); ?></a>
+      <a href="/<?php echo $route['slug']; ?>"><?php echo htmlspecialchars($route['title']); ?></a>
       <?php endforeach; ?>
     <?php endif; ?>
 

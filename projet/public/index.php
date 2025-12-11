@@ -41,7 +41,7 @@ $router->post('/admin/users/modify-user-role', 'AdminUserController@modifyRole')
 
 // BO Pages
 $router->get('/admin/pages', 'AdminPageController@listPages');
-$router->get('/admin/page', 'AdminPageController@viewPage');
+$router->get('/{slug}', 'AdminPageController@viewPage');
 $router->get('/admin/new-page', 'AdminPageController@viewNewPage');
 $router->post('/admin/create-new-page', 'AdminPageController@createNewPage');
 $router->get('/admin/delete-page', 'AdminPageController@deletePage');
