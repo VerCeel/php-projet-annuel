@@ -33,7 +33,7 @@ class Router {
       return (new $controllerName())->$actionName();
     }
     // Dynamique
-    // Le if est un peu inutile lorsque l'on voit l'index => à améliorer = le 404 not found ne pop jamais.
+    // version simple et fonctionnelle mais à améliorer
     foreach($this->routes[$method] as $path => $controllerAction) {
       if(strpos($path, '{') !== false && strpos($path, '}') !== false) {
         $paramValue = $uri;

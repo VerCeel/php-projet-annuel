@@ -95,7 +95,7 @@ class AuthController extends Controller {
       echo "Une erreur est survenue";
       return;
     }
-    $token =  bin2hex(random_bytes(32));
+    $token = bin2hex(random_bytes(32));
     $userModel->saveResetToken($user['id'], $token);
     if(\MailService::sendResetPassword($email, $token)) {
       echo "Vérifiez votre adresse mail";
