@@ -2,7 +2,6 @@
 
 namespace Controllers;
 
-require_once __DIR__ . '/../Models/PageModel.php';
 use Models\PageModel;
 
 class HeaderController {

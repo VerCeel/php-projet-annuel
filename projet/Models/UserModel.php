@@ -2,7 +2,6 @@
 
 namespace Models;
 
-require __DIR__ . '/../Core/Database.php';
 use Core\Database;
 
 class UserModel {
@@ -31,6 +30,12 @@ class UserModel {
     ]);
   }
 
+  public function isEmailUnique($email) {
+    $preReq = $this->db->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
+    $preReq->execute([$email]);
+    return !$preReq->fetch();
+  }
+
   public function verifyEmailByToken($token) {
     $preReq = $this->db->prepare("UPDATE users SET is_verified = 1, verification_token = 0 WHERE verification_token = ?");
     $preReq->execute([$token]);
@@ -50,7 +55,7 @@ class UserModel {
   }
 
   public function deleteUser($id) {
-    $preRequest = $this->db->prepare("DELETE FROM users where id = ?");
+    $preRequest = $this->db->prepare("DELETE FROM users where id = ? AND id != 5");
     $preRequest->execute([$id]);
   }
 
@@ -85,7 +90,7 @@ class UserModel {
   }
 
   public function findByEmailAndUpdateRole($email, $role) {
-    $preReq = $this->db->prepare("UPDATE users SET role = ? WHERE email = ? AND id != 4");
+    $preReq = $this->db->prepare("UPDATE users SET role = ? WHERE email = ? AND id != 5");
     $preReq->execute([$role, $email]);
   }
 }

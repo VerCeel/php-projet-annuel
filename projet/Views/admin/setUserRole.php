@@ -5,6 +5,7 @@
   <input type="hidden" name="email" value="<?php echo $user['email'] ?>">
   <select name="role" id="role">
     <option value="ADMIN">Admin</option>
+    <option value="EDITOR">Editor</option>
     <option value="USER">User</option>
   </select>
   <button type="submit">Nouveau rôle</button>

@@ -33,10 +33,10 @@ class Router {
       return (new $controllerName())->$actionName();
     }
     // Dynamique
-    // version simple et fonctionnelle mais à améliorer
     foreach($this->routes[$method] as $path => $controllerAction) {
       if(strpos($path, '{') !== false && strpos($path, '}') !== false) {
-        $paramValue = $uri;
+        $paramValue = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+        $paramValue = end($paramValue);
         [$controllerName, $actionName] = explode('@', $controllerAction);
         $controllerName = "Controllers\\" . $controllerName;
         $controller = new $controllerName();

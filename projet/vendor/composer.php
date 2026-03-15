@@ -1,1 +1,0 @@
-<!-- On pourra utiliser le composer pour éviter d'appeler les routes à chaque fois et utiliser mailer plus simplement -->

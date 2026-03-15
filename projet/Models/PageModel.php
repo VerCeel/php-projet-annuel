@@ -2,11 +2,11 @@
 
 namespace Models;
 
-require_once __DIR__ . '/../Core/Database.php';
 
 use Core\Database;
 
 class PageModel {
+
   private static ?PageModel $instance = null;
   private $db;
 
@@ -27,7 +27,7 @@ class PageModel {
     return $preRequest->fetchAll();
   }
 
-  public function createPage($title, $slug, $content) {
+  public function createPage($title, $slug, $content, $authorName, $status, $date) {
     // Voir si le slug est disponible
     $baseSlug = $slug;
     $i = 1;
@@ -40,14 +40,25 @@ class PageModel {
       $slug = $baseSlug . '-' .$i++;
     }
     // Crée un nouvel élément avec le bon slug
-    $preRequest = $this->db->prepare("INSERT INTO pages (title, slug, content) VALUES (?, ?, ?)");
-    $preRequest->execute([$title, $slug, $content]);
+    $preRequest = $this->db->prepare("INSERT INTO pages (title, slug, content, status, author, date) VALUES (?, ?, ?, ?, ?, ?)");
+    $preRequest->execute([$title, $slug, $content, $status, $authorName, $date]);
   }
 
   public function getPageBySlug($slug) {
     $preRequest = $this->db->prepare("SELECT * FROM pages where slug = ?");
     $preRequest->execute([$slug]);
-    return $preRequest->fetch();
+    $page = $preRequest->fetch();
+    if($page && $page['status'] === "draft" && (!isset($_SESSION['user']) || $_SESSION['user']['role'] === 'USER')) {
+      header("Location: /");
+      exit;
+    }
+    return $page;
+  }
+
+  public function getPublishedPageBySlug($slug) {
+    $preReq = $this->db->prepare("SELECT * FROM pages where slug = ? AND statut = ?");
+    $preReq->execute([$slug, 'published']);
+    return $preReq->fetch();
   }
 
   public function deletePageById($id) {
@@ -55,8 +66,8 @@ class PageModel {
     $preReq->execute([$id]);
   }
 
-  public function updatePageBySlug($title, $content, $formerSlug, $newSlug) {
-    $preReq = $this->db->prepare("UPDATE pages SET title = ?, slug = ?, content = ? WHERE slug =?");
-    $preReq->execute([$title, $newSlug, $content, $formerSlug]);
+  public function updatePageBySlug($title, $content, $formerSlug, $newSlug, $status, $authorName) {
+    $preReq = $this->db->prepare("UPDATE pages SET title = ?, slug = ?, content = ?, status = ?, author = ? WHERE slug =?");
+    $preReq->execute([$title, $newSlug, $content, $status, $authorName, $formerSlug]);
   }
 }

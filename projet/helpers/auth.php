@@ -33,3 +33,16 @@ function checkAdmin() {
     exit;
   }
 }
+
+function checkRole($role) {
+  if(!isset($_SESSION['user'])) {
+    header("Location: /login");
+    exit;
+  }
+  $userModel = UserModel::getInstance();
+  $user = $userModel->getUserById($_SESSION['user']['id']);
+  if(!in_array($user['role'], $role)) {
+    echo "404 not found";
+    exit;
+  }
+}

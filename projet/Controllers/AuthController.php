@@ -3,9 +3,7 @@
 namespace Controllers;
 
 require __DIR__ . '/../helpers/MailService.php';
-require_once __DIR__ . '/../Models/UserModel.php';
 require __DIR__ . '/../helpers/checkInputs.php';
-require_once __DIR__ . '/../Core/Controller.php';
 
 use Core\Controller;
 use Models\UserModel;
@@ -28,7 +26,14 @@ class AuthController extends Controller {
       echo "Veuillez choisir un mot de passe avec au moins 8 caractères, un caractère spécial et une majuscule.";
       return;
     }
+
     $userModel = UserModel::getInstance();
+    // Verification unicité de l'email
+    if(!$userModel->isEmailUnique($_POST['email'])) {
+      echo "Cet email est déjà utilisé";
+      return;
+    }
+
     $token = bin2hex(random_bytes(32));
     $result = $userModel->createUser($_POST['email'], $_POST['password'], 0, $token);
     if(!$result) {
@@ -61,7 +66,8 @@ class AuthController extends Controller {
     // On peut utiliser un id plus complexe pour + de sécurité.
     $_SESSION['user'] = [
       'id' => $user['id'],
-      'role' => $user['role']
+      'role' => $user['role'],
+      'email' => $user['email']
     ];
     echo 'connexion réussie';
     $this->render('/page/homePage', []);
@@ -123,4 +129,11 @@ class AuthController extends Controller {
       echo "Token expiré";
     }
   }
+
+  public function logout() {
+    session_destroy();
+    header("Location: /");
+    exit;
+  }
+  
 }

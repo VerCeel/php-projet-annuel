@@ -5,8 +5,19 @@
   <input type="text" name="title" id="title" value="<?php echo $page['title']?>" required>
   <br>
   <br>
-  <label>Contenu:</label>
+  <label>Contenu :</label>
   <textarea name="content" id="content" required><?php echo $page['content']?></textarea>
+  <br>
+  <br>
+  <label for="status">Séletctionnez le statut de l'article :</label>
+  <select name="status" id="status">
+    <option value="published" <?= $page['status'] == "published" ? "selected" : '' ?>>Publié</option>
+    <option value="draft" <?= $page['status'] == "draft" ? "selected" : '' ?>>Brouillon</option>
+  </select>
+  <br>
+  <br>
+  <label for="author">Auteur :</label>
+  <input type="text" name="author" id="author" value="<?php echo $page['author'];?>">
   <br>
   <br>
   <button type="submit">Modifier</button>

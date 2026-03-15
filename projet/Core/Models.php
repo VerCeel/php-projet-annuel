@@ -1,0 +1,3 @@
+<!-- 
+On pourrait gérer ici ce qui est commun aux modèles comme la connexion à la bdd pour factoriser et rendre le projet plus scalable...
+-->

@@ -1,12 +1,8 @@
 <?php
 session_start();
+date_default_timezone_set('Europe/Paris');
 
-require __DIR__ . '/../Core/Router.php';
-require __DIR__ . '/../Controllers/HomePageController.php';
-require __DIR__ . '/../Controllers/AuthController.php';
-require __DIR__ . '/../Controllers/AdminUserController.php';
-require __DIR__ . '/../Controllers/AdminPageController.php';
-
+require_once __DIR__ . '/../Core/Autoloader.php';
 use Core\Router;
 
 // Instancie le router
@@ -26,6 +22,9 @@ $router->get('/verify', 'AuthController@verifyEmail');
 $router->get('/login', 'AuthController@loginForm');
 $router->post('/login/submit', 'AuthController@loginSubmit');
 
+// Logout
+$router->get('/logout', 'AuthController@logout');
+
 // Mot de passe oublié / envoi
 $router->get('/forgotten-password', 'AuthController@viewForgottenPassword');
 $router->post('/forgotten-password', 'AuthController@forgottenPassword');
@@ -41,7 +40,7 @@ $router->post('/admin/users/modify-user-role', 'AdminUserController@modifyRole')
 
 // BO Pages
 $router->get('/admin/pages', 'AdminPageController@listPages');
-$router->get('/{slug}', 'AdminPageController@viewPage');
+$router->get('/page/{slug}', 'AdminPageController@viewPage');
 $router->get('/admin/new-page', 'AdminPageController@viewNewPage');
 $router->post('/admin/create-new-page', 'AdminPageController@createNewPage');
 $router->get('/admin/delete-page', 'AdminPageController@deletePage');

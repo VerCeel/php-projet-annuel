@@ -3,27 +3,28 @@
 namespace Controllers;
 
 require_once __DIR__ . '/../helpers/auth.php';
-require_once __DIR__ . '/../Models/PageModel.php';
-require_once __DIR__ . '/../Core/Controller.php';
 require __DIR__ . '/../helpers/slugify.php';
 
 use function helpers\slugify;
 use Core\Controller;
-use function helpers\checkAdmin;
-use function helpers\checkAuth;
+// use function helpers\checkAdmin;
+// use function helpers\checkAuth;
+use function helpers\checkRole;
+
 use Models\PageModel;
 
 class AdminPageController extends Controller {
 
   public function listPages() {
-    checkAdmin();
+    checkRole(["ADMIN", "EDITOR"]);
     $pageModel = PageModel::getInstance();
     $pages = $pageModel->getAllPages();
     $this->render('admin/pages', ['pages' => $pages, 'title' => 'Gestion des pages admin']);
   }
 
   public function viewPage($slug) {
-    checkAuth();
+    // On peut enable le checkauth pour forcer les visiteurs à s'inscrire pour accéder aux articles
+    // checkAuth();
     $slug = urldecode($slug);
     $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
@@ -35,12 +36,12 @@ class AdminPageController extends Controller {
   }
 
   public function viewNewPage() {
-    checkAdmin();
+    checkRole(["ADMIN", "EDITOR"]);
     $this->render('/admin/newPage', []);
   }
 
   public function viewPageToUpdate() {
-    checkAdmin();
+    checkRole(["ADMIN", "EDITOR"]);
     if (!isset($_GET['slug'])) {
       echo "Page introuvable";
       return;
@@ -52,24 +53,27 @@ class AdminPageController extends Controller {
   }
 
   public function createNewPage() {
-    checkAdmin();
+    checkRole(["ADMIN", "EDITOR"]);
     $title = $_POST['title'];
     $content = $_POST['content'];
+    $authorName = $_POST['author'];
+    $status = $_POST['status'];
     if(!$title || !$content){
       echo "Merci de remplir l'ensemble des champs";
       return;
     }
     $slug = slugify($title);
+    $date = date("Y-m-d H:i:s");
     $pageModel = PageModel::getInstance();
 
-    $pageModel->createPage($title, $slug, $content);
+    $pageModel->createPage($title, $slug, $content, $authorName, $status, $date);
 
     header("Location: /admin/pages");
     exit;
   }
 
   public function deletePage() {
-    checkAdmin();
+    checkRole(["ADMIN", "EDITOR"]);
     if(!isset($_GET['id'])) {
       echo "Page introuvable";
       return;
@@ -81,17 +85,19 @@ class AdminPageController extends Controller {
   }
 
   public function updatePage() {
-    checkAdmin();
+    checkRole(["ADMIN", "EDITOR"]);
     $title = $_POST['title'];
     $content = $_POST['content'];
+    $authorName = $_POST['author'];
+    $status = $_POST['status'];
     if(!$title || !$content){
       echo "Merci de remplir l'ensemble des champs";
       return;
     }
-    $newSlug = slugify($title);
-    $newSlug = implode('-', preg_split('/\s+/', strtolower($title)));
+    $newSlug = slugify($title); 
     $pageModel = PageModel::getInstance();
-    $pageModel->updatePageBySlug($title, $content, $_GET['slug'], $newSlug);
+    $pageModel->updatePageBySlug($title, $content, $_GET['slug'], $newSlug, $status, $authorName);
     header("Location: /admin/update-page-view?slug=" . $newSlug);
   }
+
 }
