@@ -2,16 +2,14 @@
 
 namespace Controllers;
 
-require_once __DIR__ . '/../helpers/auth.php';
-
 use Core\Controller;
 use Models\UserModel;
-use function helpers\checkRole;
+use helpers\Auth;
 
 class AdminUserController extends Controller {
 
   public function __construct() {
-    checkRole(['ADMIN']);
+    Auth::checkRole(['ADMIN']);
   }
 
   public function listUsers() {

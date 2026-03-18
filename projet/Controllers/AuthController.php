@@ -2,14 +2,10 @@
 
 namespace Controllers;
 
-require __DIR__ . '/../helpers/MailService.php';
-require __DIR__ . '/../helpers/checkInputs.php';
-
 use Core\Controller;
 use Models\UserModel;
 use helpers\MailService;
-use function helpers\isSafePassword;
-use function helpers\isValidEmail;
+use helpers\checkInputs;
 
 class AuthController extends Controller {
   
@@ -18,11 +14,11 @@ class AuthController extends Controller {
   }
 
   public function signupSubmit() {
-    if(!isValidEmail($_POST['email'])) {
+    if(!checkInputs::isValidEmail($_POST['email'])) {
       echo "Merci de rentrer un email correct";
       return;
     }
-    if(!isSafePassword($_POST['password'])) {
+    if(!checkInputs::isSafePassword($_POST['password'])) {
       echo "Veuillez choisir un mot de passe avec au moins 8 caractères, un caractère spécial et une majuscule.";
       return;
     }
@@ -41,7 +37,7 @@ class AuthController extends Controller {
       return;
     }
 
-    if(\MailService::sendVerificationEmail($_POST['email'], $token)){
+    if(MailService::sendVerificationEmail($_POST['email'], $token)){
       echo "inscription réussie, vérifie ta boîte mail";
     } else {
       echo "inscription réussie mais impossible d'envoyer le mail";
@@ -103,7 +99,7 @@ class AuthController extends Controller {
     }
     $token = bin2hex(random_bytes(32));
     $userModel->saveResetToken($user['id'], $token);
-    if(\MailService::sendResetPassword($email, $token)) {
+    if(MailService::sendResetPassword($email, $token)) {
       echo "Vérifiez votre adresse mail";
     } else {
       echo "un probleme est survenu lors de la réinitialisation du mot de passe";
@@ -116,7 +112,7 @@ class AuthController extends Controller {
 
   public function resetPassword() {
     $newPassword = $_POST['password'];
-    if(!isSafePassword($newPassword)) {
+    if(!checkInputs::isSafePassword($newPassword)) {
       echo "Veuillez choisir un mot de passe avec au moins 8 caractères, une majuscule et un caractère spécial.";
       return;
     }

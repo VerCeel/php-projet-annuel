@@ -1,7 +1,10 @@
 <header>
   <nav>
+    <?php if(!empty($_SESSION['user'])): ?>
+      <p>Droits : <?= $_SESSION['user']['role'] ?></p>
+    <?php endif ;?>
     <a href="/">Accueil</a>
-    <?php require_once __DIR__ . '/../../Controllers/HeaderController.php'; 
+    <?php
       use Controllers\HeaderController;
       $headerController = new HeaderController();
       $routes = $headerController->getRoutes();
@@ -9,7 +12,7 @@
     <?php /** if (!empty($_SESSION['user'])): */ ?>
       <?php foreach($routes as $route): ?>
         <?php if($route['status'] === "published"): ?>
-          <a href="/page/<?php echo $route['slug']; ?>"><?php echo htmlspecialchars($route['title']); ?></a>
+          <a href="/page/<?= h($route['slug']); ?>"><?= h($route['title']); ?></a>
         <?php endif; ?>
       <?php endforeach; ?>
     <?php /**endif; */ ?>

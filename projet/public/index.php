@@ -3,6 +3,12 @@ session_start();
 date_default_timezone_set('Europe/Paris');
 
 require_once __DIR__ . '/../Core/Autoloader.php';
+
+// On charge l'autoloader en appelant StringUtils. Comme ça on peut juste appeler la méthode h de la Classe au lieu d'apeller StringUtils::h() à chaque fois = on factorise. H est un allias de htmlSpecialChar
+function h($str) {
+  return \helpers\StringUtils::h($str);
+}
+
 use Core\Router;
 
 // Instancie le router
@@ -47,6 +53,7 @@ $router->get('/admin/delete-page', 'AdminPageController@deletePage');
 $router->get('/admin/update-page-view', 'AdminPageController@viewPageToUpdate');
 $router->post('/admin/update-page', 'AdminPageController@updatePage');
 
-$router->dispatch();
+// Voir la sitemap
+$router->get('/sitemap.xml', 'sitemapController@getPublishedRoutes');
 
-// include __DIR__ . '/../Views/layout/footer.php';
+$router->dispatch();

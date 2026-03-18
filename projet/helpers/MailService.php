@@ -1,6 +1,8 @@
 <?php
 // helpers/MailService.php
 
+namespace helpers;
+
 require_once __DIR__.'/PHPMailer/PHPMailer.php';
 require_once __DIR__.'/PHPMailer/SMTP.php';
 require_once __DIR__.'/PHPMailer/Exception.php';
@@ -49,7 +51,7 @@ class MailService {
     }
     
     public static function sendResetPassword($to, $token) {
-                $mail = new PHPMailer(true);
+        $mail = new PHPMailer(true);
         try {
             // SMTP
             $mail->isSMTP();

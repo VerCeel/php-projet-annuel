@@ -15,7 +15,7 @@
   <br>
   <br>
   <label for="author">Nom de l'auteur :</label>
-  <input type="text" name="author" id="author" value="<?php echo htmlspecialchars(explode("@", $_SESSION['user']['email'])[0]) ?>">
+  <input type="text" name="author" id="author" value="<?= h(explode("@", $_SESSION['user']['email'])[0]) ?>">
   <br>
   <br>
   <button type="submit">Créer le nouvel article</button>

@@ -10,14 +10,14 @@
   </tr>
     <?php foreach($pages as $page): ?>
       <tr>
-        <td> <?php echo $page['id']; ?> </td>
-        <td> <?php echo $page['title']; ?> </td>
-        <td> <?php echo $page['slug']; ?> </td>
-        <td> <?php echo mb_substr($page['content'], 0, 10) . '...'; ?> </td>
+        <td> <?= h($page['id']) ; ?> </td>
+        <td> <?= h($page['title']) ; ?> </td>
+        <td> <?= h($page['slug']) ; ?> </td>
+        <td> <?= mb_substr($page['content'], 0, 10) . '...'; ?> </td>
         <td>
-          <a href="/<?php echo $page['slug']; ?>">Voir</a> 
-          <a href="/admin/update-page-view?slug=<?php echo $page['slug']; ?>">Modifier</a> 
-          <a href="/admin/delete-page?id=<?php echo $page['id']; ?>">Supprimer</a>
+          <a href="/<?= h($page['slug']) ; ?>">Voir</a> 
+          <a href="/admin/update-page-view?slug=<?= h($page['slug']) ; ?>">Modifier</a> 
+          <a href="/admin/delete-page?id=<?= h($page['id']) ; ?>">Supprimer</a>
         </td>
       </tr>
     <?php endforeach; ?>

@@ -9,11 +9,11 @@
   </tr>
   <?php foreach($users as $user): ?>
   <tr>
-    <td><?php echo $user['id']?></td>
-    <td><?php echo $user['email']?></td>
-    <td><?php echo $user['role']?></td>
-    <td><a href="/admin/users/delete?id=<?php echo $user['id']?>">supprimer</a></td>
-    <td><a href="/admin/users/modify-user-role?id=<?php echo $user['id']?>">Modifier le role de l'utilisateur</a></td>
+    <td><?= h($user['id'])?></td>
+    <td><?=  h($user['email'])?></td>
+    <td><?= h($user['role'])?></td>
+    <td><a href="/admin/users/delete?id=<?= h($user['id'])?>">supprimer</a></td>
+    <td><a href="/admin/users/modify-user-role?id=<?= h($user['id'])?>">Modifier le role de l'utilisateur</a></td>
   </tr>
   <?php endforeach; ?>
 </table>

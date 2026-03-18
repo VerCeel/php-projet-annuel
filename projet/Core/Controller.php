@@ -1,6 +1,6 @@
 <?php
 
-// On peut utiliser ce fichier pour faire un render, plutot que de mettre les header/footer dans du html = plus scalable + meilleur pour le SEO car on ne change pas le title.
+// On peut utiliser ce fichier pour faire un render, plutot que de mettre les header/footer dans du html = plus scalable + meilleur pour le SEO car on ne change pas le title + on a pas besoin de faire plein d'import manuelement dans notre header/footer.
 
 namespace Core;
 

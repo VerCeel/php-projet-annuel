@@ -70,4 +70,10 @@ class PageModel {
     $preReq = $this->db->prepare("UPDATE pages SET title = ?, slug = ?, content = ?, status = ?, author = ? WHERE slug =?");
     $preReq->execute([$title, $newSlug, $content, $status, $authorName, $formerSlug]);
   }
+
+  public function getAllpublishedPages() {
+    $preReq = $this->db->prepare("SELECT * FROM pages where status = ?");
+    $preReq->execute(["published"]);
+    return $preReq->fetchAll();
+  }
 }
