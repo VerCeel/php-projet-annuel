@@ -33,6 +33,7 @@ class Router {
       return (new $controllerName())->$actionName();
     }
     // Dynamique
+    // Ca marche bien mais si on veut rendre le site scalable avec d'autre slug il faudra complexifier la logique!
     foreach($this->routes[$method] as $path => $controllerAction) {
       if(strpos($path, '{') !== false && strpos($path, '}') !== false) {
         $paramValue = explode('/', trim($_SERVER['REQUEST_URI'], '/'));

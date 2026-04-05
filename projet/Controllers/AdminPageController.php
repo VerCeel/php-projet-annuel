@@ -21,6 +21,7 @@ class AdminPageController extends Controller {
   public function viewPage($slug) {
     // On peut enable le checkauth pour forcer les visiteurs à s'inscrire pour accéder aux articles
     // checkAuth();
+    // Permet de décoder les accents, les caractères spéciaux etc, mais normalement le slug est propre
     $slug = urldecode($slug);
     $pageModel = PageModel::getInstance();
     $page = $pageModel->getPageBySlug($slug);
