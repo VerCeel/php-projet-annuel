@@ -5,9 +5,29 @@
   --dark-blue: #3932FA;
   --blue: #326BFA;
   --purple-blue: #8985FA;
+  --bg: #ffffff;
+  --text: #000000;
+  --card-bg: #f9f9f9;
+  --border: #ddd;
 }
 
 /* variable pour réutiliser les couleurs dans le scss */
+.dark {
+  --dark-blue: #1a1a40;
+  --blue: #1d2e75;
+  --purple-blue: #5150a7;
+  --bg: #1e1e1e;
+  --text: #ffffff;
+  --card-bg: #1e1e1e;
+  --border: #333;
+}
+.dark p, .dark span, .dark a, .dark th, .dark td, .dark tr, .dark label, .dark tr > th {
+  color: #9d9cee;
+}
+.dark textarea, .dark input, .dark select {
+  background-color: rgb(201, 190, 182);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Saira Stencil", sans-serif;
   font-weight: 700;
@@ -33,7 +53,6 @@ span {
 }
 
 .btn {
-  margin-top: 1rem;
   display: inline-block;
   padding: 1rem 1.5rem;
   border: none;
@@ -42,7 +61,7 @@ span {
   font-weight: 700;
   text-align: center;
   transition: all 0.4s ease;
-  color: white;
+  color: whitesmoke;
   font-family: "Montserrat", sans-serif;
 }
 .btn:hover {
@@ -62,9 +81,16 @@ span {
 }
 .btn--tertiary {
   background-color: var(--purple-blue);
+  display: flex;
 }
 .btn--tertiary:hover {
   background-color: var(--dark-blue);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .table {
@@ -72,18 +98,20 @@ span {
   border-collapse: collapse;
   margin-top: 1rem;
   font-family: "Montserrat", sans-serif;
+  background-color: var(--card-bg);
+  border-color: var(--border);
 }
 .table th, .table td {
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   padding: 0.5rem 1rem;
   text-align: left;
 }
 .table th {
   background-color: var(--blue);
-  color: black;
+  color: white;
 }
 .table tr:nth-child(even) {
-  background-color: #f5f5f5;
+  background-color: var(--bg);
 }
 .table tr:hover td {
   background-color: rgba(137, 133, 250, 0.7);
@@ -96,12 +124,19 @@ span {
 .table a:hover {
   text-decoration: underline;
 }
+@media (max-width: 768px) {
+  .table .hide-mobile {
+    display: none;
+  }
+}
 
 .form-field {
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5rem;
   align-items: center;
+  background-color: var(--card-bg);
+  border-color: var(--border);
 }
 .form-field label {
   margin-bottom: 0.2rem;
@@ -113,7 +148,7 @@ span {
   width: 60%;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   font-size: 1rem;
   outline: none;
   margin-top: 0.5rem;
@@ -130,6 +165,9 @@ span {
 .form-field textarea {
   min-height: 5rem;
 }
+.form-field .btn {
+  margin-top: 1rem;
+}
 
 .navbar {
   display: flex;
@@ -141,22 +179,22 @@ span {
 }
 .navbar-right {
   display: flex;
-  gap: 4rem;
-  margin-left: auto;
+  gap: 2rem;
+  align-items: center;
 }
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 10rem;
+  gap: 4rem;
 }
-.navbar a {
+.navbar a, .navbar span {
   color: white;
   text-decoration: none;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   transition: opacity 0.2s ease;
 }
-.navbar a:hover {
+.navbar a:hover, .navbar span:hover {
   opacity: 0.8;
 }
 .navbar-dropdown {
@@ -203,6 +241,18 @@ span {
   font-size: 0.9rem;
   opacity: 0.8;
 }
+@media (max-width: 764px) {
+  .navbar .navbar-left {
+    gap: 1rem;
+  }
+  .navbar .navbar-right {
+    gap: 0.5rem;
+    margin-right: 0;
+  }
+  .navbar .hidden-mobile {
+    display: none;
+  }
+}
 
 .alert {
   position: fixed;
@@ -225,6 +275,18 @@ span {
 }
 .alert--error {
   background-color: #dc3545;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+h1, h2, h3, h4, h5, h6, p, span, p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /*# sourceMappingURL=main.css.map */

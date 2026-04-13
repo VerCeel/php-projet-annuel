@@ -14,10 +14,11 @@
 
 
 <h2>Les boutons</h2>
-
-<div class="btn btn--primary">Bouton principal</div>
-<div class="btn btn--secondary">Bouton secondaire</div>
-<div class="btn btn--tertiary">Bouton tertiaire</div>
+<div class="btn-container">
+  <div class="btn btn--primary">Bouton principal</div>
+  <div class="btn btn--secondary">Bouton secondaire</div>
+  <div class="btn btn--tertiary">Bouton tertiaire</div>
+</div>
 
 <h2>Les tableaux</h2>
 <table class="table">
@@ -85,6 +86,14 @@
   </div>
 </nav>
 
+
 <h2>Les bulles d'alerte</h2>
-<button class="btn btn--primary" id="trigger-alert-success">Succès</button>
-<button class="btn btn--secondary" id="trigger-alert-error">Erreur</button>
+<div class="btn-container">
+  <button class="btn btn--primary" id="trigger-alert-success">Succès</button>
+  <button class="btn btn--secondary" id="trigger-alert-error">Erreur</button>
+</div>
+
+<h2>Le dark mode</h2>
+<div class="btn-container">
+  <button class="btn btn--tertiary toggle-theme">Dark mode</button>
+</div>

@@ -1,7 +1,6 @@
 @use '../partials/typography' as t;
 
 .btn {
-  margin-top: 1rem;
   display: inline-block;
   padding: 1rem 1.5rem;
   border: none;
@@ -10,7 +9,7 @@
   font-weight: 700;
   text-align: center;
   transition: all 0.4s ease;
-  color: white;
+  color: whitesmoke;
   font-family: t.$font-description;
 
 
@@ -36,9 +35,16 @@
 
   &--tertiary {
     background-color: var(--purple-blue);
+    display: flex;
 
     &:hover {
       background-color: var(--dark-blue);
     }
   }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }

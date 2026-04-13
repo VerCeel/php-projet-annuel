@@ -11,17 +11,18 @@
 
   &-right {
     display: flex;
-    gap: 4rem;
-    margin-left: auto;
+    gap: 2rem;
+    align-items: center;
   }
 
   &-left {
     display: flex;
     align-items: center;
-    gap: 10rem;
+    gap: 4rem;
   }
 
-  a {
+
+  a, span {
     color: white;
     text-decoration: none;
     font-family: t.$font-body;
@@ -82,5 +83,20 @@
     color: white;
     font-size: 0.9rem;
     opacity: 0.8;
+  }
+
+  @media (max-width: 764px) {
+    .navbar-left {
+      gap: 1rem;
+    }
+
+    .navbar-right {
+      gap: 0.5rem;
+      margin-right: 0;
+    }
+
+    .hidden-mobile {
+      display: none;
+    }
   }
 }

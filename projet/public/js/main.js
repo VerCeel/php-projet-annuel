@@ -54,3 +54,17 @@ if(btnError) {
     showAlert('Erreur!', 'error')
   })
 }
+
+// Dark mode
+
+const toggleBtns = document.querySelectorAll('.toggle-theme');
+
+const toggleTheme = () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+};
+
+toggleBtns.forEach(btn => {
+    btn.addEventListener('click', toggleTheme);
+});

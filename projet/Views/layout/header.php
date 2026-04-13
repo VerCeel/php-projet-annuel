@@ -11,7 +11,7 @@
         $routes = $headerController->getRoutes();
       ?> 
       <div class="navbar-dropdown">
-        <button class="navbar-burger">Pages ↓</button>
+        <button class="navbar-burger"><span>Pages ↓</span></button>
         <div class="navbar-menu">
           <?php /** if (!empty($_SESSION['user'])): */ ?>
             <?php foreach($routes as $route): ?>
@@ -32,6 +32,9 @@
       <?php if (!empty($_SESSION['user']) && $_SESSION['user']['role'] === 'ADMIN'): ?>
         <a href="/admin/users">Utilisateurs admin</a>
       <?php endif; ?>
+      <div class="hidden-mobile">
+        <button class="btn btn--tertiary toggle-theme">✨</button>
+      </div>
     </div>
   </nav>
 </header>

@@ -5,6 +5,8 @@
   flex-direction: column;
   margin-bottom: 0.5rem;
   align-items: center;
+  background-color: var(--card-bg);
+  border-color: var(--border);
   
   label {
     margin-bottom: 0.2rem;
@@ -17,7 +19,7 @@
     width: 60%;
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     font-size: 1rem;
     outline: none;
     margin-top: 0.5rem;
@@ -32,10 +34,13 @@
     padding: 0.5rem 1rem;
     box-sizing: border-box;
     width: 62%;
-
   }
 
   textarea {
     min-height: 5rem;
+  }
+
+  .btn {
+    margin-top: 1rem;
   }
 }

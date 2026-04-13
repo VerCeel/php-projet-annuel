@@ -4,6 +4,11 @@
   --dark-blue: #3932FA;
   --blue: #326BFA;
   --purple-blue: #8985FA;
+
+  --bg: #ffffff;
+  --text: #000000;
+  --card-bg: #f9f9f9;
+  --border: #ddd;
 }
 
 /* variable pour réutiliser les couleurs dans le scss */
@@ -12,3 +17,23 @@ $colors: (
   "blue": var(--blue),
   "purple-blue": var(--purple-blue),
 );
+
+.dark {
+  --dark-blue: #1a1a40;
+  --blue: #1d2e75;
+  --purple-blue: #5150a7;
+
+  --bg: #1e1e1e;
+  --text: #ffffff;
+  --card-bg: #1e1e1e;
+  --border: #333;
+
+
+  p, span, a, th, td, tr, label, tr>th{
+    color: #9d9cee;
+  }
+
+  textarea, input, select {
+    background-color: rgb(201, 190, 182);
+  }
+}
