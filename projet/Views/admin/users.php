@@ -1,11 +1,12 @@
 
 <h1>User list</h1>
-<table>
+<table class="table">
   <tr>
     <th>ID</th>
     <th>Email</th>
     <th>Role</th>
-    <th>Actions</th>
+    <th>Actions: Supprimer</th>
+    <th>Actions: Modifier</th>
   </tr>
   <?php foreach($users as $user): ?>
   <tr>

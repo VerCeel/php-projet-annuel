@@ -1,0 +1,14 @@
+
+/* Couleurs accessibles partout */
+:root {
+  --dark-blue: #3932FA;
+  --blue: #326BFA;
+  --purple-blue: #8985FA;
+}
+
+/* variable pour réutiliser les couleurs dans le scss */
+$colors: (
+  "dark-blue": var(--dark-blue),
+  "blue": var(--blue),
+  "purple-blue": var(--purple-blue),
+);

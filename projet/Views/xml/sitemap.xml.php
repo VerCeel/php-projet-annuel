@@ -1,6 +1,6 @@
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- On définit les règle suivies : ici ce sont celles officielles à suivre, on l'indique au robot google -->
+    <!-- On définit les règle suivies : ici ce sont celles officielles à suivre, on l'indique au robot google -->
     <!-- Ici on met l'adresse de notre site, la homepage
     Puis on indique la moyenne selon laquelle notre site risque de changer = la fréquence à laquelle on publie pour que le robot sache à quelle fréquence revenir et l'importance de la homepage=1-->
     <url>

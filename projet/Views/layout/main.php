@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= h($title ?? 'Mini CMS') ?></title>
+  <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
   <?php require_once __DIR__ . '/../../Controllers/HeaderController.php'; 
@@ -17,4 +18,5 @@
   </main>
   <?php require __DIR__ . '/footer.php'; ?>
 </body>
+<script src="/js/main.js"></script>
 </html>

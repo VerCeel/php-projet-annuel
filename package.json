@@ -1,0 +1,24 @@
+{
+  "name": "projet-final",
+  "version": "1.0.0",
+  "description": "To launch this project you gotta : -place your IDE at the right folder",
+  "main": "index.js",
+  "scripts": {
+    "watch": "sass --watch ./projet/src/scss/main.scss ./projet/public/css/main.css",
+    "build": "sass --style=compressed ./projet/src/scss/main.scss ./projet/public/css/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VerCeel/php-projet-annuel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VerCeel/php-projet-annuel/issues"
+  },
+  "homepage": "https://github.com/VerCeel/php-projet-annuel#readme",
+  "dependencies": {
+    "sass": "^1.99.0"
+  }
+}

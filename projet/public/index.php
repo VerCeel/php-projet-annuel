@@ -56,4 +56,9 @@ $router->post('/admin/update-page', 'AdminPageController@updatePage');
 // Voir la sitemap
 $router->get('/sitemap.xml', 'sitemapController@getPublishedRoutes');
 
+// Voir le design guide
+$router->get('/design-guide', 'PageController@getDesignGuide');
+
 $router->dispatch();
+
+

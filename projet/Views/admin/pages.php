@@ -1,12 +1,13 @@
 
 <h1>Liste des pages:</h1>
 <a href="/admin/new-page"> Créer une nouvelle page</a>
-<table>
+<table class="table">
   <tr>
     <th>ID</th>
     <th>Titre</th>
     <th>Slug</th>
     <th>Contenu</th>
+    <th>Actions</th>
   </tr>
     <?php foreach($pages as $page): ?>
       <tr>

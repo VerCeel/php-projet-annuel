@@ -24,9 +24,10 @@ class AdminPageController extends Controller {
     // Permet de décoder les accents, les caractères spéciaux etc, mais normalement le slug est propre
     $slug = urldecode($slug);
     $pageModel = PageModel::getInstance();
-    $page = $pageModel->getPageBySlug($slug);
+    $page = $pageModel->getPublishedPageBySlug($slug);
+    
     if(!$page) {
-      echo "page introuvable";
+      header("HTTP/1.0 404 not found");
       return;
     }
     $this->render('/page/page', ['page' => $page, 'title' => $slug]);

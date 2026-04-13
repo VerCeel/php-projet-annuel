@@ -1,0 +1,86 @@
+@use '../partials/typography' as t;
+@use '../partials/variables' as v;
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  padding: 1rem;
+  background-color: var(--blue);
+  position: relative;
+
+  &-right {
+    display: flex;
+    gap: 4rem;
+    margin-left: auto;
+  }
+
+  &-left {
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-family: t.$font-body;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &-dropdown {
+    position: relative;
+  }
+
+  &-burger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  &-menu {
+    position: absolute;
+    top: 100%;
+    margin-top: 1.5rem;
+    background: white;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    min-width: 150px;
+    border: solid 1px #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    a {
+      display: block;
+      box-sizing: border-box;
+      padding: 0.5rem 1rem;
+      color: black;
+      margin-bottom: 0.5rem;
+
+      &:hover {
+        background-color: var(--purple-blue);
+        color: white;
+      }
+    }
+  }
+
+  &-menu--open {
+    display: flex;
+  }
+
+  p {
+    margin: 0;
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+}

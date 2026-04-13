@@ -1,0 +1,32 @@
+@use '../partials/variables' as v;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+IE:wght@100..400&family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap');
+
+$font-title: 'Saira Stencil', sans-serif;
+
+$font-body: 'Inter', sans-serif;
+
+$font-description : 'Montserrat', sans-serif;
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-title;
+  font-weight: 700;
+  color: var(--purple-blue);
+}
+
+p {
+  font-family: $font-body;
+}
+
+a {
+  font-family: $font-body;
+  text-decoration: none;
+  color: var(--blue);
+  &:hover {
+    color: var(--dark-blue);
+    transition: all 0.5s ease;
+  }
+}
+
+span {
+  font-family: $font-description;
+}

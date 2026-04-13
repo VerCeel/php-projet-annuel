@@ -10,7 +10,7 @@ use helpers\checkInputs;
 class AuthController extends Controller {
   
   public function signupForm() {
-    require __DIR__ . '/../Views/auth/signup.php';
+    $this->render('/Auth/signup', []);
   }
 
   public function signupSubmit() {
@@ -45,7 +45,7 @@ class AuthController extends Controller {
   }
 
   public function loginForm() {
-    require __DIR__ . '/../Views/Auth/login.php';
+    $this->render('/Auth/login', []);
   }
 
   public function loginSubmit() {
@@ -53,8 +53,12 @@ class AuthController extends Controller {
     $user = $userModel->getUserByEmail($_POST['email']);
 
     if(!$user || !password_verify($_POST['password'], $user['password'])) {
-      echo 'Echec lors de la connexion';
-      return;
+      if(session_status() === PHP_SESSION_NONE) {
+        session_start();
+      }
+      $_SESSION['error'] = "Authentification incorrecte";
+      header('Location: /login');
+      exit;
     }
     if(session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -65,8 +69,9 @@ class AuthController extends Controller {
       'role' => $user['role'],
       'email' => $user['email']
     ];
-    echo 'connexion réussie';
+    $_SESSION['success'] = 'Connexion réussie';
     $this->render('/page/homePage', []);
+    exit;
   }
 
   public function verifyEmail() {
@@ -86,7 +91,7 @@ class AuthController extends Controller {
   }
 
   public function viewForgottenPassword() {
-    require __DIR__ . '/../Views/Auth/forgottenPassword.php';
+    $this->render('/Auth/forgottenPassword', []);
   }
 
   public function forgottenPassword() {
@@ -107,7 +112,7 @@ class AuthController extends Controller {
   }
 
   public function viewResetPassword() {
-    require __DIR__ . '/../Views/Auth/resetPassword.php';
+    $this->render('Auth/resetPassword', []);
   }
 
   public function resetPassword() {

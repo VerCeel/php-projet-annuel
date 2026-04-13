@@ -1,6 +1,6 @@
 
 <h1>Modifier mon article :</h1>
-<form method="POST" action="/admin/update-page?slug=<?= h($page['slug']); ?>">
+<form method="POST" action="/admin/update-page?slug=<?= h($page['slug']); ?>" class="form-field">
   <label>Titre</label>
   <input type="text" name="title" id="title" value="<?= h($page['title']); ?>" required>
   <br>
@@ -20,7 +20,7 @@
   <input type="text" name="author" id="author" value="<?= h($page['author']);?>">
   <br>
   <br>
-  <button type="submit">Modifier</button>
+  <button type="submit" class="btn btn--tertiary">Modifier</button>
 </form>
 <br>
 <a href="/admin/pages">Retourner à la liste des pages</a>

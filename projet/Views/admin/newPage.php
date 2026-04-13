@@ -1,6 +1,6 @@
 
 <h1>Créer une nouvelle page</h1>
-<form method="POST" action="/admin/create-new-page">
+<form method="POST" action="/admin/create-new-page" class="form-field">
   <input type="text" name="title" id="title" placeholder="Titre" required>
   <br>
   <br>
@@ -18,5 +18,5 @@
   <input type="text" name="author" id="author" value="<?= h(explode("@", $_SESSION['user']['email'])[0]) ?>">
   <br>
   <br>
-  <button type="submit">Créer le nouvel article</button>
+  <button type="submit" class="btn btn--secondary">Créer le nouvel article</button>
 </form>

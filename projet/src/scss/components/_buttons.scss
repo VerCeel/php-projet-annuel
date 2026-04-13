@@ -1,0 +1,44 @@
+@use '../partials/typography' as t;
+
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.4s ease;
+  color: white;
+  font-family: t.$font-description;
+
+
+  &:hover {
+    scale: 1.02;
+  }
+
+  &--primary {
+    background-color: var(--blue);
+
+    &:hover {
+      background-color: var(--purple-blue);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--dark-blue);
+
+    &:hover {
+      background-color: var(--blue);
+    }
+  }
+
+  &--tertiary {
+    background-color: var(--purple-blue);
+
+    &:hover {
+      background-color: var(--dark-blue);
+    }
+  }
+}

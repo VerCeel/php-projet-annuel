@@ -56,7 +56,7 @@ class PageModel {
   }
 
   public function getPublishedPageBySlug($slug) {
-    $preReq = $this->db->prepare("SELECT * FROM pages where slug = ? AND statut = ?");
+    $preReq = $this->db->prepare("SELECT * FROM pages where slug = ? AND status = ?");
     $preReq->execute([$slug, 'published']);
     return $preReq->fetch();
   }
